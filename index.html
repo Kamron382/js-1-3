@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Watch Swiper</title>
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css"
+  />
+  <style>
+    :root {
+      --bg1: #ffc89f;
+      --bg2: #d3d3d3;
+      --bg3: #9effc9;
+      --bg4: #ffa89e;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      transition: background 0.5s ease;
+      background: var(--bg1);
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: auto;
+      padding: 40px 20px;
+    }
+
+    nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px 20px;
+      font-size: 18px;
+    }
+
+    .logo {
+      font-weight: bold;
+    }
+
+    nav ul {
+      display: flex;
+      gap: 30px;
+      list-style: none;
+    }
+
+    nav ul li {
+      cursor: pointer;
+    }
+
+    .btn {
+      background: black;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      border-radius: 20px;
+    }
+
+    .content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+    }
+
+    .text {
+      max-width: 500px;
+      flex: 1;
+    }
+
+    .text h1 {
+      font-size: 36px;
+      margin-bottom: 10px;
+    }
+
+    .text h2 {
+      color: #555;
+      margin: 10px 0;
+    }
+
+    .text p {
+      margin: 10px 0;
+    }
+
+    .price {
+      font-size: 32px;
+      margin: 20px 0;
+    }
+
+    .swiper {
+      width: 100%;
+      max-width: 400px;
+      flex: 1;
+      position: relative;
+    }
+
+    .swiper-slide {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .swiper-slide img {
+      width: 250px;
+      height: auto;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      color: black;
+    }
+
+    @media (max-width: 768px) {
+      .content {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+
+      .text {
+        max-width: 100%;
+        margin-bottom: 30px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <nav>
+      <div class="logo">⌚ xwa</div>
+      <ul>
+        <li>Shop</li>
+        <li>Exotic</li>
+        <li>Contact Us</li>
+      </ul>
+      <button class="btn">Sign Up</button>
+    </nav>
+
+    <div class="content">
+      <div class="text">
+        <h1>Exquisite Watches</h1>
+        <h2><span style="color: #333">Choose Luxury, </span><strong>Choose Us</strong></h2>
+        <p>Discover the perfect watch for every occasion and elevate your style with timeless elegance and precision craftsmanship.</p>
+        <div class="price">$430.00</div>
+      </div>
+
+      <div class="swiper">
+        <div class="swiper-wrapper">
+          <div class="swiper-slide"><img src="watch1.png" alt="Watch 1" /></div>
+          <div class="swiper-slide"><img src="watch2.png" alt="Watch 2" /></div>
+          <div class="swiper-slide"><img src="watch3.png" alt="Watch 3" /></div>
+          <div class="swiper-slide"><img src="watch4.png" alt="Watch 4" /></div>
+        </div>
+        <!-- Navigation buttons -->
+        <div class="swiper-button-next"></div>
+        <div class="swiper-button-prev"></div>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+  <script>
+    const swiper = new Swiper('.swiper', {
+      loop: true,
+      slidesPerView: 1,
+      spaceBetween: 20,
+      centeredSlides: true,
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+
+    function updateBackground(index) {
+      const root = getComputedStyle(document.documentElement);
+      let color;
+      switch (index) {
+        case 0:
+          color = root.getPropertyValue('--bg1');
+          break;
+        case 1:
+          color = root.getPropertyValue('--bg2');
+          break;
+        case 2:
+          color = root.getPropertyValue('--bg3');
+          break;
+        case 3:
+          color = root.getPropertyValue('--bg4');
+          break;
+        default:
+          color = root.getPropertyValue('--bg1');
+      }
+      document.body.style.background = color;
+    }
+
+    swiper.on('slideChange', () => {
+      updateBackground(swiper.realIndex);
+    });
+
+    // Initialize background on load
+    updateBackground(swiper.realIndex);
+  </script>
+</body>
+</html>
